@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- Author Form View -->
+        <record id="author_form_view" model="ir.ui.view">
+            <field name="name">author.form</field>
+            <field name="model">library.author</field>
+            <field name="arch" type="xml">
+                <form string="Author">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="image" widget="image"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Author Tree View -->
+        <record id="author_tree_view" model="ir.ui.view">
+            <field name="name">author.tree</field>
+            <field name="model">library.author</field>
+            <field name="arch" type="xml">
+                <tree string="Authors">
+                    <field name="name"/>
+                    <field name="image" widget="image" options="{'size': [40, 40]}"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Author Kanban View -->
+        <record id="author_kanban_view" model="ir.ui.view">
+            <field name="name">author.kanban</field>
+            <field name="model">library.author</field>
+            <field name="arch" type="xml">
+                <kanban class="o_kanban_mobile">
+                    <field name="name"/>
+                    <field name="image"/>
+
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_global_click">
+                                <div class="o_kanban_record_top">
+
+                                    <div class="o_kanban_title">
+                                        <strong><field name="name"/></strong>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <!-- Author Action -->
+        <record id="action_author" model="ir.actions.act_window">
+            <field name="name">Authors</field>
+            <field name="res_model">library.author</field>
+            <field name="view_mode">tree,form,kanban</field>
+        </record>
+
+        <!-- Author Menu -->
+        <menuitem id="menu_authors" name="Authors" parent="menu_library" action="action_author" sequence="20"/>
+    </data>
+</odoo>

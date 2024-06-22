@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- Borrower Form View -->
+        <record id="borrower_form_view" model="ir.ui.view">
+            <field name="name">borrower.form</field>
+            <field name="model">library.borrower</field>
+            <field name="arch" type="xml">
+                <form string="Borrower">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="email"/>
+                            <field name="phone"/>
+                            <field name="address"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Borrower Tree View -->
+        <record id="borrower_tree_view" model="ir.ui.view">
+            <field name="name">borrower.tree</field>
+            <field name="model">library.borrower</field>
+            <field name="arch" type="xml">
+                <tree string="Borrowers">
+                    <field name="name"/>
+                    <field name="email"/>
+                    <field name="phone"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Borrower Action -->
+        <record id="action_borrower" model="ir.actions.act_window">
+            <field name="name">Borrowers</field>
+            <field name="res_model">library.borrower</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- Borrower Menu -->
+        <menuitem id="menu_borrowers" name="Borrowers" parent="menu_library" action="action_borrower" sequence="40"/>
+    </data>
+</odoo>

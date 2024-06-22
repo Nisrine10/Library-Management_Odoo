@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- Loan Form View -->
+        <record id="loan_form_view" model="ir.ui.view">
+            <field name="name">loan.form</field>
+            <field name="model">library.loan</field>
+            <field name="arch" type="xml">
+                <form string="Loan">
+                    <sheet>
+                        <group>
+                            <field name="borrower_id"/>
+                            <field name="book_id" domain="[('available_copies','>',0)]"/>
+                            <field name="loan_date"/>
+                            <field name="return_date"/>
+                            <field name="state"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Loan Tree View -->
+        <record id="loan_tree_view" model="ir.ui.view">
+            <field name="name">loan.tree</field>
+            <field name="model">library.loan</field>
+            <field name="arch" type="xml">
+                <tree string="Loans" editable="bottom">
+                    <field name="borrower_id"/>
+                    <field name="book_id"/>
+                    <field name="loan_date"/>
+                    <field name="return_date"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Loan Graph View -->
+        <record id="loan_graph_view" model="ir.ui.view">
+            <field name="name">loan.graph</field>
+            <field name="model">library.loan</field>
+            <field name="arch" type="xml">
+                <graph string="Loan Analysis" type="bar">
+                    <field name="state" type="row"/>
+                    <field name="id" type="measure" operator="count"/>
+                </graph>
+            </field>
+        </record>
+
+        <!-- Loan Action -->
+        <record id="action_loan" model="ir.actions.act_window">
+            <field name="name">Loans</field>
+            <field name="res_model">library.loan</field>
+            <field name="view_mode">tree,form,graph</field>
+        </record>
+
+        <!-- Loan Menu -->
+        <menuitem id="menu_loans" name="Loans" parent="menu_library" action="action_loan" sequence="30"/>
+    </data>
+</odoo>
+

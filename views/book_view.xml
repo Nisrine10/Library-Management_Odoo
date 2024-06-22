@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- Book Search View -->
+        <record id="book_search_view" model="ir.ui.view">
+            <field name="name">book.search</field>
+            <field name="model">library.book</field>
+            <field name="arch" type="xml">
+                <search string="Books">
+                    <field name="title"/>
+                    <field name="author_id"/>
+                    <field name="category_id"/>
+                </search>
+            </field>
+        </record>
+
+        <!-- Book Form View -->
+        <record id="book_form_view" model="ir.ui.view">
+            <field name="name">book.form</field>
+            <field name="model">library.book</field>
+            <field name="arch" type="xml">
+                <form string="Book">
+                    <sheet>
+                        <group>
+                            <field name="title"/>
+                            <field name="author_id"/>
+                            <field name="category_id"/>
+                            <field name="total_copies"/>
+                            <field name="available_copies"/>
+                            <field name="image"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Book Tree View -->
+        <record id="book_tree_view" model="ir.ui.view">
+            <field name="name">book.tree</field>
+            <field name="model">library.book</field>
+            <field name="arch" type="xml">
+                <tree string="Books">
+                    <field name="image" widget="image" options="{'size': [40, 40]}"/>
+                    <field name="title"/>
+                    <field name="author_id"/>
+                    <field name="category_id"/>
+                    <field name="total_copies"/>
+                    <field name="available_copies"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Book Kanban View -->
+        <record id="book_kanban_view" model="ir.ui.view">
+            <field name="name">book.kanban</field>
+            <field name="model">library.book</field>
+            <field name="arch" type="xml">
+                <kanban class="o_kanban_mobile">
+                    <field name="title"/>
+                    <field name="author_id"/>
+                    <field name="category_id"/>
+
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_global_click">
+                                <div class="o_kanban_record_top">
+                                    <div class="o_kanban_title">
+                                        <strong><field name="title"/></strong>
+                                    </div>
+                                </div>
+                                <div class="o_kanban_content">
+                                    <field name="author_id"/>
+                                    <field name="category_id"/>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <!-- Book Chart View -->
+        <record id="book_chart_view" model="ir.ui.view">
+            <field name="name">book.chart</field>
+            <field name="model">library.book</field>
+            <field name="arch" type="xml">
+                <graph string="Books Analysis" type="bar">
+                    <field name="category_id" type="row"/>
+                    <field name="total_copies" type="measure"/>
+                </graph>
+            </field>
+        </record>
+
+        <!-- Book Action -->
+        <record id="action_book" model="ir.actions.act_window">
+            <field name="name">Books</field>
+            <field name="res_model">library.book</field>
+            <field name="view_mode">tree,form,kanban,graph</field>
+            <field name="search_view_id" ref="book_search_view"/>
+        </record>
+
+        <!-- Book Menu -->
+        <menuitem id="menu_library" name="Library Management" sequence="10"/>
+        <menuitem id="menu_books" name="Books" parent="menu_library" action="action_book" sequence="10"/>
+    </data>
+</odoo>

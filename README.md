@@ -1,6 +1,4 @@
-<center><span style="color: #702690; font-size: 24px; font-weight: bold;">Library Management</span></center>
-
-A comprehensive library management system built using Odoo v16, designed to streamline library operations efficiently.
+<span style="color: #702690; font-size: 24px; font-weight: bold;">Library Management</span>
 
 ---
 ## Project Overview
