@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- Category Form View -->
+        <record id="category_form_view" model="ir.ui.view">
+            <field name="name">category.form</field>
+            <field name="model">library.category</field>
+            <field name="arch" type="xml">
+                <form string="Category">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Category Tree View -->
+        <record id="category_tree_view" model="ir.ui.view">
+            <field name="name">category.tree</field>
+            <field name="model">library.category</field>
+            <field name="arch" type="xml">
+                <tree string="Categories">
+                    <field name="name"/>
+                    <field name="book_count" string="Number of Books"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Category Kanban View -->
+        <record id="category_kanban_view" model="ir.ui.view">
+            <field name="name">category.kanban</field>
+            <field name="model">library.category</field>
+            <field name="arch" type="xml">
+                <kanban>
+                    <field name="name"/>
+                    <field name="book_count"/>
+
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_global_click">
+                                <div class="o_kanban_record_top">
+                                    <div class="o_kanban_title">
+                                        <strong><field name="name"/></strong>
+                                    </div>
+                                </div>
+                                <div class="o_kanban_record_body">
+                                    <div>
+                                        <span>Number of Books:</span>
+                                        <span class="o_badge" t-esc="record.book_count.raw_value"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <!-- Category Graph View -->
+        <record id="category_graph_view" model="ir.ui.view">
+            <field name="name">category.graph</field>
+            <field name="model">library.category</field>
+            <field name="arch" type="xml">
+                <graph string="Category Analysis" type="bar">
+                    <field name="name" type="row"/>
+                    <field name="book_count" type="measure"/>
+                </graph>
+            </field>
+        </record>
+
+        <!-- Category Action -->
+        <record id="action_category" model="ir.actions.act_window">
+            <field name="name">Categories</field>
+            <field name="res_model">library.category</field>
+            <field name="view_mode">tree,form,kanban,graph</field>
+        </record>
+
+        <!-- Category Menu -->
+        <menuitem id="menu_categories" name="Categories" parent="menu_library" action="action_category" sequence="30"/>
+    </data>
+</odoo>

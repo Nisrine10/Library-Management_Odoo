@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- Email Template for Loan Due Reminder -->
+        <record id="email_template_loan_due_reminder" model="mail.template">
+            <field name="name">Loan Due Reminder</field>
+            <field name="email_from">n.aomari@mundiapolis.ma</field> <!-- Fixed sender's email address -->
+            <field name="subject">Loan Due Reminder</field>
+            <field name="model_id" ref="library.model_library_loan"/>
+            <field name="body_html" type="html">
+                <![CDATA[
+                <p>Hello ${object.borrower_id.name},</p>
+                <p>This is a reminder that your loan for the book <strong>${object.book_id.title}</strong> is due on <strong>${object.return_date}</strong>.</p>
+                <p>Please return the book on or before the due date to avoid any late fees.</p>
+                <p>Thank you!</p>
+                ]]>
+            </field>
+        </record>
+
+
+        <!-- Scheduled Action for Loan Due Reminder -->
+        <record id="ir_cron_loan_due_reminder" model="ir.cron">
+            <field name="name">Loan Due Reminder</field>
+            <field name="model_id" ref="library.model_library_loan"/>
+            <field name="state">code</field>
+            <field name="code">model.send_loan_due_reminders()</field>
+            <field name="active" eval="True"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall" eval="-1"/>
+        </record>
+    </data>
+</odoo>
